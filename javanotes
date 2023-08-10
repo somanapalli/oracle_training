@@ -1,0 +1,812 @@
+java :
+
+ what is java?
+ 
+    java is oo pl.
+	
+  platform independent -> wora -> write once run / reuse anywhere.
+
+  
+
+why pl?
+ 
+   ->to develop the software/applications
+   
+ c,cpp,java,python,.net ..-> s/w
+ 
+ what kind of applications we have?
+ 
+  1.standalone applications/desktop applications
+  
+  ->calculator,antivirus,acrobatic reader etc...
+  
+    results are not sharable across the globe.
+	
+    console based applications.
+	
+  2.internet based applications
+   
+      ->google,gmail,facebook... 
+
+    results are sharable across the globe.
+	
+	
+java:
+`````
+    1995
+	
+	28 years 
+	
+      
+java is maintaining popularity.
+
+->because of it's charactersitcs/features/buzzwrds
+
+1.platform independent
+2.secured
+3.robusted
+4.simple
+...
+
+windows:
+
+c program (.c)
+
+compile: .exe
+
+run: output
+
+
+windows:
+  are you able to execute this program? 
+  yes
+  
+  
+  
+  c is platform dependent
+  
+ windows 
+  .java
+  .class
+  
+ unix
+    yes
+	java is platform independent.
+	
+  one os to other os.
+
+  java program ->programmer responsibility 
+  
+  steps you have to follow to write the java program?
+  
+   syntax: rules are given by language vendors
+   
+   in case of java, sunmicrosystem org, oracle
+   
+   java is open source 
+   
+   1.download the java software -> jdk
+   2.install the software
+   3.select the editor
+   4.write the java program 
+   5.save the java program (.java)
+   6.compile the java program (.class)
+   7.run/execute the java program 
+  
+  
+ structure of the java program?
+ printf - c language
+ java is case sensitive programming languagge
+ 
+ 
+  java program should starts with by defining the class.
+  
+    class Test1
+	{
+	    public static void main(String[] args){
+		
+		  //logic
+		  
+		  System.out.println("welcome to java from oracle");
+		}
+	}
+  
+  java program execution starts from main() method
+ 
+in c program -> main()
+in java program -> public static void main(String[] args){} 
+  
+  
+  command to compile the java program?
+  
+     javac <filename>.java
+	 
+	 javac Demo.java
+	 
+  .java file contains - source code (developer)  -> java compiler 
+  
+  java compiler will take source code as an input and gives 
+  .class file .
+  
+  
+  .class file contains -> byte code 
+  
+  byte code is not human readable code which can be understandable 
+  by jvm(java virtual machine)
+  
+  who is compiling the java program ? -> java compiler 
+  
+   java compiler -> predefined java program available in jdk
+   
+  who is executing the java program?
+  
+    jvm -> java virtual machine -> 
+	jvm will take .class file as an input (byte code) and converts
+	machine level code. 
+	
+command to execute the java program?
+
+     java <classname>
+	 
+	 java Test1
+	 
+ how java  is oopl?
+ 
+ if any pl is said to be object oriented, it has to follow some 
+ principles.
+ 
+   1.oops principles.
+   
+   ->omg(object management group)
+   
+  how many oops principles we have?
+
+    1.inheritance
+    2.encapsulation 
+    3.abstraction 
+    4.polymorphism
+
+how can we achieve in java?
+
+ 	by using two concepts
+	
+	1.class 
+	2.object
+
+
+java program should starts with by defining the class only.
+
+class <classname>
+{
+     //variables
+	 //methods	 
+}	
+	
+ class is a collection of variables and methods into a single unit. 
+ that single unit is known as class. 
+ 
+  
+  variables:
+  
+     to store the data we have to provide the names. 
+	 
+	 syntax:
+	   
+	    
+		  <datatype> <variablename> =<value>;
+		  
+		  int x = 100;
+		  
+how many datatypes are available in java?
+ 8 datatypes
+ 
+ byte,short,int,long  - Integer category
+ 
+ float,double  - float category 
+ 
+ char  ->character category -> to store single character information 
+ 
+ boolean  -> boolean category -> to store logic values (eitehr true or false)
+ 
+ all these are valid
+ 
+ byte b = 100;//1 byte 
+ 
+  -128 to 127
+  
+  1 byte 
+  
+ short s = 100;
+ 
+   2 bytes
+   
+   
+ int i = 100;
+ 4 bytes
+ 
+ long l = 100;
+ 
+ 8 bytes
+ 
+ 
+ every datatype is maintaining two things
+ 
+   1.range
+   2.memory size
+   
+   
+ -2^n-1 to 2^n-1 - 1
+ n ->no.of bits 
+ 
+ 1 byte -> 8 bits
+ -2^7 to 2^7 -1
+ 
+ -128 to 127
+ 
+  float f = 4.5f;//valid ->4 bytes
+  
+  double d = 8.9;//valid   -> 8bytes 
+  
+  
+  
+  by default decimal type value is of double type in java
+  
+ 
+   char c = 'a';
+   
+   boolean b = true;
+   
+   
+  all java reserved words must be in lower case
+  
+  boolean b = false;
+  
+ methods:
+ ````````
+ functions -> in c language
+ ->to write the logic 
+ 
+ method is also a place, where we are writing the logic, to perform 
+ some operations based on the requirement.
+ 
+ 
+  syntax:
+   
+       
+    method heading-> 
+	
+	[accessmodier] <returntype> <methodname>([parameters]){
+	 
+	   //logic -method body
+	 }
+
+
+class is a collection of variables and methods into a single unit.
+
+example:
+
+define one method which displays helloworld message?
+
+  void is representing returntype 
+  meaning is not returning any value. 
+  
+    void displayInfo(){
+	   System.out.println("helloworld");
+	}
+
+define one method which returns your name?
+
+    String getName(){
+	   return "rk";
+	}
+
+return value & return type always must be 
+compatible with each other.
+char ch='a';
+String s = "rama";
+
+
+define one method which takes firstname,lastname as two parameters and 
+returns fullname is the combination of firstname and lastname?
+
+   
+   String getFullName(String firstName,String lastName){
+     return firstName+lastName;
+	 
+   }
+   
+   
+   getFullName("rk","oracle");
+   
+     ->rkoracle
+
+
+define one method which takes two integer values and displays their 
+sum?
+
+ void getSum(int x, int y)
+ {
+   System.out.println("sum is: " +(x+y));
+ }
+   
+   string + anythig is string only 
+   
+   
+  getSum(7,6)
+  
+    ->sum is: 13
+	
+	
+before i am doing the program on class 
+i would like to introduce one ides
+
+ eclipse
+ netbeans 
+ 
+   intellij
+   myeclipse..
+
+
+ the code which we are writing in the ide is autocompiled
+ we no need to compile the code manually.
+ 
+ we should keep always our userdefined classes or interfaces 
+ inside package only .
+ it is highly recommended.
+ 
+   inside a single package, how many classes we can define?
+     as many as we want
+	 
+	inner method definition is not possible in java
+	
+	we can't define the method inside another method.
+	but we can call the method from another method(inner method invocation)
+	
+	whenever we execute the java program, jvm will invoke main method 
+	only not our own methods 
+	
+	who needs to call our own method(s)?
+	  programmer.
+	  
+
+object:
+
+object is an instance of the class. 
+object is real world entity.
+
+human is the class. 
+
+are we occupying any space in the earth?
+  
+by just defininig the class, memory won't be created 
+we are not allowed to store the data.
+
+we have to create the object?
+ whenever we create the object, memory will be created for instance properties
+ when memory will be created , we are able to store the data which 
+ we declared insdie the class.
+ 
+ 
+ syntax:
+ 
+   <classname> <objectname> = new <classname>();
+   
+   Student obj = new Student();
+   
+  
+package com.oracle.corejava;
+public class Student {
+    
+    //variables
+    
+    int stid=100;
+    String stname="amulya";
+    
+    //define one method for displaying above data
+    public void displayStudentInfo(){
+        
+        System.out.println("student id is : " + stid);
+        System.out.println("student name is: " + stname);
+    
+    }
+    
+    public static void main(String[] args) {
+        
+        //create the object for Student class
+        
+       Student obj = new Student();
+        
+      // System.out.println("student id is : " + obj.stid);
+      // System.out.println("student name is: " + obj.stname);
+        
+        //call the method using object name
+        
+        obj.displayStudentInfo();
+    }
+    
+}
+
+     private
+	 default
+	 protected
+	 public 
+	 
+	  using these access modifiers we are able to restrict the 
+	  visibiility of the data over the packages.
+	  
+
+for a single class, how many objects we can create?
+ as many as we want based on the requirement.
+ 
+ 1000 students are studying 
+ 
+  assume i want to store 1000 students information?
+  
+     1000 objects we have to create
+	 every object is having one student information .
+	 
+	 in a single object, can we store multiple student(S) information?
+
+1000
+	 
+stname
+stid
+staddresss
+collegename
+
+
+ int x;//non static variable or instance variable
+ static String collegeName;//static variable.
+ 
+ for static properties memory will be created only once
+ where as for non static properties memory will be created 
+as many no.of times based on the object createion .
+
+
+ when memory will be created for static properties?
+ 
+  whenever class is loaded into main memory (classloader subsystem)-jvm
+  only one time. 
+ 
+nonstatic or instance method
+ 
+ void m1(){
+    //instance area
+ }
+
+
+ static void m1(){
+ // static area
+
+
+public static void main(String[] args)
+{
+   //static area
+}
+
+
+
+instance area:
+
+instance area is an area which belongs to instance or non-static method.
+
+
+static area: 
+
+static area is an area which belongs to static method 
+
+
+we can access the static properties in following ways from any area
+either static or non-static area 
+
+
+ 1.directly 
+ 2.using class name 
+ 3.using object name 
+ 
+ 
+
+from static area if we want to access non-static or instance properties 
+it is possible by using object name. 
+
+
+package com.oracle.corejava;
+public class Student {
+    
+    
+    //instance variables
+    int stid=100;
+    String stname="amulya";
+    //static variable
+    static String collegeName="HCU";
+    
+    //define one method for displaying above data
+    void displayStudentInfo(){
+        //instance area
+        System.out.println("student id is : " + stid);
+        System.out.println("student name is: " + stname);
+        System.out.println("college name is: " + collegeName);
+        System.out.println("college name using classname:" + Student.collegeName);
+        
+    }
+    
+    public static void main(String[] args) {
+        //static area
+        //create the object for Student class
+        
+       Student obj = new Student();
+        
+     System.out.println("student id is : " +obj.stid);
+     System.out.println("student name is: " + obj.stname);
+     
+     //accessing static property from static area 
+     
+        System.out.println("college name is: " + collegeName);
+        System.out.println("college name using classname:" + Student.collegeName);
+        System.out.println("college name using object name: " +obj.collegeName);
+    }
+    
+}
+
+    //business logic class
+	class Test1{
+	
+	    int x=100;
+		static String y = "Rama";
+		
+		//instance method
+	    public void display()
+		{
+		      System.out.println(x + " " +y);
+  		}
+	}
+	
+	//execution logic class
+	class Test2{
+	
+	  public static void main(String[] args)
+	  {
+	  //static area
+	  
+	    Test1 obj = new Test1();
+		obj.display();
+	  
+	  }
+	 }
+	
+	
+	
+java is object oriented programming language
+
+	1.inheritance
+	2.polymorphism
+	3.encapsulation 
+	4.abstraction 
+	
+inheritance:
+````````````
+	inheritance is the process of taking the properties from 
+	one class to another class. 
+	
+	
+	class Test1{
+	  //logic1 
+	}
+	
+	class Test2{
+	  //reuse logic1
+	}
+	
+	if a particular logic is common, instead of redefining the code 
+	again and again, what we have to do?
+	
+	   we have to reuse.
+	   
+	  duplication of the code will be improved. 
+
+	  memory consumption increased 
+	  
+	  ->performance will be degraded.
+	  
+by using inheritance it is possible to reuse the exisiting properties 
+from one class to another class. 
+
+	 using one java reserved keyword-> extends keyword-
+	 
+	
+	
+	
+	whenever we implemented the inheritance concept, parent class 
+	properties(variables,methods,..) will be inherited from parent class 
+	to child class.
+	
+	Test1.java:
+	````````````
+	/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.oracle.inheritance;
+
+/**
+ *
+ * @author LENOVO
+ */
+//parent class
+public class Test1 {
+    
+    
+    public void sum(int x, int y){
+        System.out.println("sum is : " +(x+y));
+    }
+}
+
+Test2.java:
+```````````
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.oracle.inheritance;
+
+/**
+ *
+ * @author LENOVO
+ */
+
+//try to make this Test2 class as child class
+//child class
+public class Test2 extends Test1{
+    
+     public static void main(String[] args) {
+        
+         Test2 obj = new Test2();
+         obj.sum(4,4);
+    }
+}
+
+note:
+using extends keyword, we are able to inherit the properties from 
+single class to single class only more than single it is not possible. 
+we will get compile time error. 
+
+Test1.java:
+````````````
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.oracle.inheritance;
+
+/**
+ *
+ * @author LENOVO
+ */
+//parent class
+public class Test1 {
+    
+    
+    public void sum(int x, int y){
+        System.out.println("sum is : " +(x+y));
+    }
+}
+
+Test2.java:
+`````````````
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.oracle.inheritance;
+
+/**
+ *
+ * @author LENOVO
+ */
+
+//try to make this Test2 class as child class
+//child class
+public class Test2 extends Test1{
+    
+    public void sub(int x, int y)
+    {
+       System.out.println("substractio is: " + (x-y)) ;  
+    }
+     public static void main(String[] args) {
+        
+         Test2 obj = new Test2();
+         obj.sum(4,4);
+         obj.sub(7,6);
+         
+         //Test1 obj = new Test1();
+         
+         //obj.sum(3,4);
+         //obj.sub(6,5);
+    }
+}
+
+
+for every java class(predefined or userdefined), there is a super class , root class 
+
+   java.lang.Object 
+   
+   
+class Test1 {
+
+}
+
+class Test2 extends Test1{
+}
+
+class Test3 extends Test2{
+}
+	
+	  Object
+	System 
+	String
+	ArrayList 
+	   .. 
+	Test1,Test2,.. -> Object 
+	
+	
+note:
+every java class is an example of inheritance.
+
+example:
+`````````
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.oracle.inheritance;
+
+/**
+ *
+ * @author LENOVO
+ */
+public class Demo {
+    
+    public static void main(String[] args) {
+        
+        //create the object for Demo class
+        
+        Demo obj = new Demo();
+        System.out.println(obj.toString());
+        
+        System.out.println(obj.hashCode());
+        
+        System.out.println(obj.getClass());
+        
+    }
+    
+}
+
+
+encapsulation:
+```````````````
+the process of wrapping up of datamembers(variables) and member 
+functions(methods)into a single unit. 
+this process is called encapuslation 
+
+	ex: class is the best example for an encapsulation.
+	
+	
+rules to make a normal java class as an encapsulated class 
+
+1.should define private variables
+2.should define public setters and public getter method(s).
+
+encapsulated classe(s).
+
+
+	setter method purpose is -> to set the data into an object
+	getter method purpose is -> to get the data from an object
+	
+	
+	
+	
+	
+
+
+	
+   
