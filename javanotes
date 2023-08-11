@@ -1521,7 +1521,246 @@ public class Test1 {
  */
 
 
+throws :
+````````
+throws is a java reserved keyword which gives an 
+indication to the calling 
+function to keep the called function under try and 
+catch block.
 
+package com.oracle.exceptions;
+//called program 
+public class Test2 {
+
+	//called method
+	public void division() throws ArithmeticException
+	{
+		int x=100,y=0;
+		System.out.println("division is: " +x/y);
+	}
+}
+
+
+package com.oracle.exceptions;
+//calling program
+public class Test3 {
+	//calling method
+	public static void main(String[] args) {
+		
+		Test2 obj = new Test2();
+		try {
+		obj.division();
+		}
+		catch(ArithmeticException ae)
+		{
+			System.out.println("passed 0 as denominator");
+		}
+	}
+
+}
+
+
+throw:
+```````
+throw is a java reserved keyword, 
+
+purpose: to throw an exception explicitly.
+
+->throwing is nothging but creating an object 
+
+ 0 as denominator -> ArithmeticException can be thrown by jvm 
+ 
+ 
+we are not throwing predefined exceptions using throw keyword.'
+we are throwing our own exceptions using throw keyword.
+
+syntax:
+
+  try{
+  throw new <exceptionclassname>();
+  }
+  catch(Exceptionclassname <referencevariable>){
+    //user friendly message
+  }
+  
+
+ecommerce website
+
+  checking the product whether my product is valid or not 
+  based on the product weight.
+  
+    if my product weight is greather than 100kgs then product is valid
+	else InvalidProductException 
+	
+Test4.java:
+```````````
+package com.oracle.exceptions;
+
+public class Test4 {
+	
+	
+	public void checkProduct(int weight)
+	{
+		
+		if(weight> 100)
+		{
+			System.out.println("product is valid");
+		}
+		else 
+		{
+			try {
+			throw new InvalidProductException("check product weight");
+			}
+			catch(InvalidProductException ip)
+			{
+				System.out.println(ip);
+			}
+		}
+	}
+	
+	
+	//mainmethod
+	
+	public static void main(String[] args) {
+		
+		Test4 obj = new Test4();
+		obj.checkProduct(20);
+	}
+
+}
+
+InvalidProductException.java:
+``````````````````````````````
+package com.oracle.exceptions;
+
+public class InvalidProductException extends Throwable{
+
+	
+	public InvalidProductException(String message)
+	{
+		super(message);
+	}
+}
+
+
+super :
+``````
+super is the java reserve keyword to refer parent class properties 
+from the child class context when both are same.
+
+ super at method level. -> referning super class method from child 
+ class context.
+ 
+ 
+super at constructor level.
+
+constructor:
+
+constructor is a special member method which is used to initialize 
+the object. 
+
+
+ without constructor:
+ 
+ package com.oracle.constructors;
+
+public class Test1 {
+
+	int x;
+	String y;
+	public void assignValues()
+	{
+		x=100;
+		y="rk";
+	}
+	public void display()
+	{
+		System.out.println(x + " " + y);
+	}
+	
+	public static void main(String[] args) {
+		
+		Test1 obj = new Test1();
+		
+		obj.assignValues();
+		obj.display();
+		
+	}
+}
+rules:
+
+constructor name and classname must be same 
+constructor should not return anything even void also.
+constructor should not be static.
+
+example:
+`````````
+package com.oracle.constructors;
+
+public class Test1 {
+
+	int x;
+	String y;
+
+	/*
+	 * public void assignValues() { x=100; y="rk"; }
+	 */
+	public Test1()
+	{
+		x=100;
+		y="rk";
+	}
+	
+	public void display()
+	{
+		System.out.println(x + " " + y);
+	}
+	
+	public static void main(String[] args) {
+		
+		Test1 obj = new Test1();
+		
+		
+		obj.display();
+		
+	}
+}
+
+types of constructors:
+
+ default constructor
+ parameterized constructor
+ 
+
+super() -> used to invoke parent class default constructor 
+
+super(...) -> used to invoke parent class parameterized constructor
+
+
+system defined default constructor example:
+````````````````````````````````````````````
+package com.oracle.constructors;
+
+public class Test2 {
+	
+	int x;
+	String y;
+
+	/*
+	 * public Test2() { x=0; y=null; }
+	 */
+	public void display()
+	{
+		System.out.println(x + " "  +y);
+	}
+	public static void main(String[] args) {
+		
+		Test2 obj = new Test2();
+		obj.display();
+		
+	}
+
+}
 
 
 
