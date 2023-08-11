@@ -1164,10 +1164,366 @@ public class Test4 {
 }
 
 
-        
+Access modifiers:
+`````````````````
+
+private 
+default is not a java keyword
+protected
+public
+
+ int x; //default variable
+ 
+purpose: these are used to control the visibiility of the data over 
+the packages.
+
+private properties we are allowed to access only with in the class
+
+package com.oracle.accessmodifiers;
+
+public class Test1 {
+	
+	private int x=100;
+	
+	private void display() {
+		System.out.println(x);
+	}
+	
+	public static void main(String[] args) {
+		
+		Test1 obj = new Test1();
+		System.out.println(obj.x);
+		obj.display();
+	}
+
+}
+package com.oracle.accessmodifiers;
+
+public class Test2  {
+
+	public static void main(String[] args) {
+		
+		Test1 obj = new Test1();
+		//obj.x;
+		//obj.display();
+	}
+}
+
+default:
+with in the package, from any class we are allowed to access 
+default properties
+
+but from other package any class, we are not allowed to acecss the 
+default properties.
+
+protected:
+with in the package we can access 
+otehr package independent class - we cannot access
+other package sub class or child class - we can acecss 
+
+public:
+there is no restriction from any package any class we are allowed 
+to acess the public property 
+
+universal access modifier
+
+
+exception handling:
+```````````````````
+exception:
+
+  in general , while we are writing the code, we may get errors 
+  
+    1. at compile time - because if you are making any mistakes 
+	                     syntactically 
+						 
+	compiletime errors 
+	
+	runtime erros(exceptions):
+	
+	2.errors which occurs at runtime meaning that during execution 
+	  of the java program.
+	  
+	  
+	why are we getting these exceptions?
+	
+	  because of logical errors
+	  
+	  division of two numbers
+	  
+	  enter firstnuber: 4
+	  enter second number: 0
+	  
+	  division: java.lang.ArithmeticException:/by zero
+	  
+	  atm machine 
+	  
+	    enter amount: 4000
+		
+		4000
+		
+		insufficient funds, please check your account
+
+		
+		
+
+if you pass any invalid data, jvm couldn't process 
+in return we will get runtime errors(Exceptions)
+
+drawbacks if we get any exceptions?
+1.abnormal termination 
+2.we will get system error messages which are not understandable by 
+  end user even which is not recommended.
+  
+exception handling:
+```````````````````
+as a programmer we should handle that exception.
+ 
+ 1.we can escape from abnormal termination meaning that 
+   able to achieve normal flow of exceution. 
+   
+   
+ 2.instead of getting system error messages we can provide user 
+ friendly messages which can be understandable by every end user.
+ 
+ 
+ how can we handle the exceptions?
+
+  using 5 java reserved keywords
+
+
+ 1.try 
+ 2.catch 
+ 3.finally 
+ 4.throws
+ 5.throw
+ 
+
+try block:
+`````````````
+try block is used to keep the problematic statements which causes 
+problems at runtime.
+
+syntax:
+  try
+  {
+    //problematic statements
+  }
+
+
+catch:
+``````
+catch block is used to catch the exception and provides user friendly 
+message.
+
+syntax:
+
+  catch(exceptionclassname <referenevariablename>)
+  {
+    //user friendly message
+  }
+
+example:
+`````````
+package com.oracle.exceptions;
+
+public class Test1 {
+	
+	public static void main(String[] args) {
+		
+		
+		int x =100,y=0;
+		try {
+		int z = x/y;
+		
+		System.out.println("division is: " +z);
+		}
+		
+		catch(ArithmeticException ae)
+		{
+			System.out.println("don't enter zero as a denominator");
+		}
+		
+		System.out.println("rest statements not executed");
+		System.out.println("rest statements not executed");
+		System.out.println("rest statements not executed");
+		System.out.println("rest statements not executed");
+		
+	}
 	
 	
+
+}
+/*
+ * Exception in thread "main" java.lang.ArithmeticException: / by zero
+	at com.oracle.exceptions.Test1.main(Test1.java:9)
+
+ * 
+ */
+
+
+once control comes from try block to catch block, it will never go back 
+to the try block.
+
+for a single try block, how many catch blocks we can define?
+ as many as we want based on the requirement.
+ 
+ 
+
+
+in java, who is the parent class for every class in java?
+
+   java.lang.Object
+   
+   
+   for all these exception classes, who is acting as the 
+   super class?
+   
+   
+
+class ArithmeticException extends RuntimeException extends Exception 
+extends Throwable extends Object
+{
+}
+
+FileNotFoundException is the checked exception 
+
+class FileNotFoundException extends Exception extends Throwable 
+extends Object{
+}
+
+while we are handling the exception , the order always from 
+child to parent (specific to general ) not from parent to child 
+(general to specific)
+
+example:
+`````````
+package com.oracle.exceptions;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class Test1 {
 	
+	public static void main(String[] args) {
+		
+		Scanner s =new Scanner(System.in);
+		
+		try {
+			
+			System.out.println("enter the first number");
+			int fno = s.nextInt();
+			System.out.println("enter the second number");
+			int sno = s.nextInt();
+			
+			int division = fno/sno;
+			
+		    System.out.println("division is : " + division );
+		}
+		
+		
+		catch(RuntimeException re) {
+			System.out.println(re);
+		}
+//		catch(ArithmeticException ae)
+//		{
+//			System.out.println("don't enter zero as a denominator");
+//		}
+//		
+//		catch(InputMismatchException im)
+//		{
+//			System.out.println("please pass only numeric values");
+//		}
+		
+		System.out.println("rest statements not executed");
+		System.out.println("rest statements not executed");
+		System.out.println("rest statements not executed");
+		System.out.println("rest statements not executed");
+		
+	}
+	
+	
+
+}
+/*
+ * Exception in thread "main" java.lang.ArithmeticException: / by zero
+	at com.oracle.exceptions.Test1.main(Test1.java:9)
+
+ * 
+ */
+
+try-keep the problematic statments
+catch -catch the exception and provides ufm
+
+finally block
+ -finally block is used to keep closing related logic 
+ -like db connetion closing logic, file closing logic etc.. 
+ -once we keep any logic inside the finally block, that logic will be 
+  executed everytime whether in positive scenario and negative scenario.
+ 
+example:
+`````````
+package com.oracle.exceptions;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class Test1 {
+	
+	public static void main(String[] args) {
+		
+		Scanner s =new Scanner(System.in);
+		
+		try {
+			
+			System.out.println("enter the first number");
+			int fno = s.nextInt();
+			System.out.println("enter the second number");
+			int sno = s.nextInt();
+			
+			int division = fno/sno;
+			
+		    System.out.println("division is : " + division );
+		}
+		
+		
+		
+		catch(ArithmeticException ae)
+		{
+			System.out.println("don't enter zero as a denominator");
+		}
+		
+		catch(InputMismatchException im)
+		{
+			System.out.println("please pass only numeric values");
+		}
+		
+		finally {
+			
+			System.out.println("finally block executed always");
+		}
+		
+		System.out.println("rest statements not executed");
+		System.out.println("rest statements not executed");
+		System.out.println("rest statements not executed");
+		System.out.println("rest statements not executed");
+		
+	}
+	
+	
+
+}
+/*
+ * Exception in thread "main" java.lang.ArithmeticException: / by zero
+	at com.oracle.exceptions.Test1.main(Test1.java:9)
+
+ * 
+ */
+
+
+
+
+
 
 
 	
