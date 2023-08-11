@@ -802,7 +802,369 @@ encapsulated classe(s).
 	setter method purpose is -> to set the data into an object
 	getter method purpose is -> to get the data from an object
 	
+	default values are there based on the datatype. 
 	
+	  for all integer category default value is 0
+	  
+	  for all float category default value is 0.0 
+	  
+	  for boolean - > false
+	  for character -> 
+	  
+	  for string -> null 
+	  
+	
+	data hiding , 
+	 ->security 
+	 
+	inheritance,encapsulation 
+	
+	
+polymorphism:
+`````````````
+it is also one of the oop principle. 
+
+ one form into many forms. 
+ 
+  1.method overloading
+  2.method overriding
+  
+  
+in java, we have 
+
+  1.compile time polymorphism-method overloading
+  2.runtime polymorphism-method overriding
+  
+
+  
+ method overloading:
+ 
+  method name is same 
+  but parameters are different
+  
+     type,no.of,orderof parameters
+	 
+m1(int x, String y){}
+m1(String x, int y){} -changing the order
+m1(float x, float y){}-type of parameters
+m1(int x, String y, double z)-no.of parameters
+
+example:
+`````````
+package com.oracle.polymorphism;
+
+public class Test1 {
+	
+	public void operation(int x, int y) {
+		System.out.println("integer sum is : " +(x+y));
+	}
+
+	public void operation(double x, double y) {
+		System.out.println("double sum is: " +(x+y));
+	}
+	
+	public static void main(String[] args) {
+		
+		Test1 obj = new Test1();
+		obj.operation(2.3,4.5);
+		obj.operation(6, 7);
+	}	
+}
+
+above example we can consider as an example for compile time polymorphism
+since polymorphism can be resolved at compile time meaning that method 
+calling is binded with specific method using reference variable at 
+compile time by the compiler.
+
+
+
+method overriding:
+```````````````````
+method name is same (method prototype)including parameters
+
+method body is different from parent class to child class. 
+
+meaning that if you want to achieve method overriding, for sure 
+we should maintain inheritance relation in between classe(s).
+
+
+note
+minimum we require 2 classes with parent child relation then only 
+we can achieve method overriding.
+
+
+why should we go for method overriding?
+
+->to achieve the concept of runtime polymorphism.
+->if we are not interested to execute existing(parent class) logic
+
+
+
+A.java:
+`````````
+package com.oracle.polymorphism;
+
+public class A {
+
+	public void operation(int x, int y) {
+		System.out.println("sum is: " +(x+y));
+	}
+}
+
+B.java:
+`````````
+package com.oracle.polymorphism;
+//child class cum execution logic class
+public class B extends A{
+
+	@Override
+	public void operation(int x, int y)
+	{
+		System.out.println("substraction is: " +(x-y));
+	}
+	public static void main(String[] args) {
+		
+		B obj = new B();
+		obj.operation(4,3);
+	}
+}
+
+
+method overriding - runtime polymorphism.
+
+A.java:
+```````
+package com.oracle.polymorphism;
+
+public class A {
+
+	public void operation(int x, int y) {
+		System.out.println("sum is: " +(x+y));
+	}
+}
+
+
+B.java:
+````````package com.oracle.polymorphism;
+//child class cum execution logic class
+public class B extends A{
+
+	@Override
+	public void operation(int x, int y)
+	{
+		System.out.println("substraction is: " +(x-y));
+	}
+	public static void main(String[] args) {
+		
+		//B obj = new B();
+		//obj.operation(4,3);
+		
+		//A obj = new A();
+		//obj.operation(3, 4);
+		//converting child type object to parent type object -upcasting
+		 A obj=new B();//Runtime polymorphism
+		 obj.operation(4, 3);
+		 
+		 //Converting parent type object to child type object - downcasting
+		 //B obj = (B)new A();
+		 //obj.operation(4, 3);
+		
+	}
+}
+
+abstraction:
+`````````````
+abstraction refers hiding internal implementation details 
+and providing functionalites to the end user. 
+
+
+
+ sending one message from my mobile to my friend mobile. 
+ we are not focusing on how object can provide the service. 
+ we are just focusing on what that object can provide?
+ 
+ 
+-abstract class
+-interface
+
+abstract class:
+````````````````
+
+if a class contains any undefined method, then it is mandatory 
+to make that class as an abstract class otherwise we will get 
+compile time error. 
+
+ abstract class Test1{
+    abstract void sum(int x, int y);//declare the method
+ }
+
+we are not allowed to create the object for an abstract class. 
+
+if any property is common , make that as an abstract and define 
+with differnt logics in different classes based on the requirement.
+
+for a single abstract class, how many implementation classes we can define?
+
+based on the requirement, as many as we want.
+
+from one implementation class to anotehr class implementation class 
+logic is going to be different.
+
+
+ Test1.java:
+`````````````
+package com.oracle.abstraction;
+
+public abstract class Test1 {
+	
+	
+	public abstract void operation(int x, int y);
+
+}
+
+
+Test2.java:
+```````````
+package com.oracle.abstraction;
+
+//implementation class 
+public class Test2 extends Test1 {
+
+	@Override
+	public void operation(int x, int y) {
+		
+		System.out.println("sum logic :" +(x+y));
+
+	}
+
+}
+
+Test3.java:
+````````````
+package com.oracle.abstraction;
+
+//implementation class
+public class Test3 extends Test1 {
+
+	@Override
+	public void operation(int x, int y) {
+		System.out.println("division is: " +(x/y));
+	}
+
+}
+
+Test.java:
+````````````
+package com.oracle.abstraction;
+
+//execution logic class
+public class Test {
+
+	public static void main(String[] args) {
+		
+		//create an object of Test1 class
+		//runtime polymorphism - upcasting
+		//Test1 obj = new Test2();
+		Test1 obj = new Test3();
+		obj.operation(4, 2);
+		
+	}
+}
+
+using abstract class, we can achieve the abstraction in between 
+0 to 100%
+ 
+  to achieve 100% abstraction we will go for 
+  interface(s).
+  
+interface:
+``````````
+  syntax:
+   
+       interface <interfacename>
+	   {
+	        //constants
+			//abstract methods
+
+	   }
+	  
+	  
+	ex:
+  
+        interface i1{
+              void m1();
+         }
+
+by default interface methods are public abstract , we no need 
+to write explicitly like abstract classe(s).
+by default interface variables are public static final.
+
+can we create the object for interface:
+
+ i1 obj = new i1();
+ obj.m1();
+	
+creating the object for an interface is nothing but creating the object
+for it's implementation class. 
+
+ 
+by using implements keyword, we are allowed to bring the interface 
+properties to the implementation class.
+
+
+Bank.java:
+```````````
+package com.oracle.abstraction;
+
+public interface Bank {
+	
+	double getRateOfInterest();
+
+}
+
+package com.oracle.abstraction;
+
+public class Icici implements Bank {
+
+	@Override
+	public double getRateOfInterest() {
+		// TODO Auto-generated method stub
+		return 5.5;
+	}
+
+}
+
+package com.oracle.abstraction;
+
+public class CityBank implements Bank {
+
+	@Override
+	public double getRateOfInterest() {
+		// TODO Auto-generated method stub
+		return 7.5;
+	}
+
+}
+
+package com.oracle.abstraction;
+
+public class Test4 {
+	
+	public static void main(String[] args) {
+		
+		//Bank obj = new Icici();
+		
+		//System.out.println("icici bank rate of interst is: " + obj.getRateOfInterest());
+		
+        Bank obj = new CityBank();
+		
+		System.out.println("City bank rate of interst is: " + obj.getRateOfInterest());
+	}
+
+}
+
+
+        
 	
 	
 	
