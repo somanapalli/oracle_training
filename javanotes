@@ -1762,8 +1762,317 @@ public class Test2 {
 
 }
 
+collection framework :
+```````````````````````
 
 
+   int a = 100;
+   
+     int b = 200;
+	 
+	 1 crore values -> 1 variable 
+	 
+it is possible by declaring a variable as an array.
+
+	int x[]={100,200,300,400,500};
+	
+	
+	whenever we store the values inside an array, it is getting stored
+	based on the index. 
+	index value always starts from 0th location.
+	length represents no.of elemens resides in that array
+	
+	x.length = 5
+	
+	if length is 5 , maximum index is 4
+	
+	if length is n, maximum index is (n-1) 
+	beause index starts from 0th location.
+	
+	
+sop(x[0])
+
+
+ int x[]={100,200,300,400,"rama"};
+ 
+ 
+using arrays, we can store only homogenious type of data, not 
+heterogenious data. 
+
+in arrays, for every operation we have to write the logic 
+manually.
+
+arrays are not following standard ds.
+
+arrays size is fixed in nature ,we can't increase or decrease the 
+size of an array at runtime. 
+
+
+int x[]={100,200,300,400,500};
+	
+	
+
+x[5]=600;
+
+to overcome these drawbacks, we have one concept i.e 
+
+Collection framework in java:
+````````````````````````````
+
+List interface:
+`````````````````
+->it allows both homogenious and heterogenious objects
+
+->insertion order is preserved 
+
+->duplicate objects are allowed
+
+->null insertion is possible. 
+
+ ArrayList
+ LinkedList
+ 
+  List l = new ArrayList();
+  List l = new LinkedList();
+  
+ 
+from jdk1.5 version onwards, eventhough we are passing primitive type 
+values internally it gets converted into object types. 
+and viceversa.
+
+  autoboxing 
+  & autounboxing
+  
+package com.oracle.cfw;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Test1 {
+	
+	public static void main(String[] args) {
+		
+		
+		//create the object for List
+		
+		List l = new ArrayList();
+		
+		l.add(Integer.valueOf(100));
+		l.add(new String("rk"));
+		l.add(Float.valueOf(2.3f));
+		
+		l.add(Integer.valueOf(100));
+		
+		l.add(null);
+		
+		l.add(67);
+		
+	
+		for(int i=0;i<l.size();i++) {
+			System.out.println(l.get(i));
+		}
+		
+		System.out.println("==================");
+		for(Object o:l)
+		{
+			System.out.println(o);
+		}
+		
+	}
+
+}
+  
+example:
+``````````
+package com.oracle.cfw;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Test1 {
+	
+	public static void main(String[] args) {
+		
+		
+		//create the object for List
+		
+		List l = new ArrayList();
+		
+		//System.out.println(l.getClass().getName());
+		
+		
+		for(int i=1;i<=10;i++)
+		{
+			l.add(i);
+		}
+		
+		for(Object o: l)
+		{
+			//Parent to Child type casting -down casting
+			Integer x = (Integer)o;
+			
+			if(x%2==0)
+			{
+				System.out.println(x);
+			}
+		}
+		
+	}
+
+}
+
+using generics :
+``````````````````
+1.explicit type casting is not required 
+2.we will get compile time errors rather than runtime errors which are 
+far better .
+
+   package com.oracle.cfw;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Test1 {
+	
+	public static void main(String[] args) {
+		
+		
+		//create the object for List with generi
+		
+		List<Integer> l = new ArrayList<>();
+		
+		//System.out.println(l.getClass().getName());
+		
+		
+		for(int i=1;i<=10;i++)
+		{
+			l.add(i);
+		}
+		
+		//l.add("rama");
+		
+		for(Integer o: l)
+		{
+		  if(o%2==0)
+			{
+				System.out.println(o);
+			}
+		}
+		
+		
+		
+		
+	}
+
+}
+
+
+package com.oracle.cfw;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Test1 {
+	
+	public static void main(String[] args) {
+		
+		
+		//create the object for List with generi
+		
+		List<Employee> l = new ArrayList<>();
+		
+		l.add(new Employee(100,"Rama"));
+		l.add(new Employee(200,"sreeyansh"));
+		
+		l.add(new Employee(300,"amulya"));
+		l.add(new Employee(400,"vedanth"));
+		
+		
+		for(Employee e:l)
+		{
+			if(e.getEmpname().startsWith("a"))
+			{
+				System.out.println(e.getEmpid() + " " +e.getEmpname());
+			}
+		}
+		
+	}
+
+}
+
+if our frequet operation is insertin /deleteion /updation then 
+we will go for LinkedList because internally it follows doublylinkedlist 
+algorithm 
+
+whereas if our frequent operation is retreival then we can go for 
+ArrayList because ArrayList which implements from RandomAccess 
+
+
+example:
+``````````
+package com.oracle.cfw;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Test2 {
 
 	
-   
+	public static void main(String[] args) {
+		
+		//create the object for List interface
+		
+		List l = new ArrayList();
+		
+		l.add(12);
+		l.add(null);
+		l.add(34);
+		l.add(5);
+		l.add("rama");
+		l.add(true);
+		
+		System.out.println("before removing" + l);
+		
+		l.remove(5);
+		
+		System.out.println("after removing"  + l);
+		
+		l.remove(new Integer(34));
+		
+		System.out.println(l);
+		
+		System.out.println("size is : " + l.size());
+		
+		
+		System.out.println("is empty ? " + l.isEmpty());
+		
+		System.out.println(l.contains("rama"));
+	   
+	    System.out.println("3rd index element is : " + l.get(3));
+		
+	    l.clear();
+	    
+	    System.out.println("size is after clearning: " + l.size());
+		
+	    System.out.println(l);
+	}
+}
+
+
+Set
+  HashSet
+  LinkedHashSet
+  
+SortedSet
+  TreeSet
+
+Queue 
+
+
+ Map 
+ SortedMap
+ 
+   HashMap,
+   LinkedHashMap
+   TreeMap
+
