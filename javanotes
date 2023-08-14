@@ -2076,3 +2076,490 @@ Queue
    LinkedHashMap
    TreeMap
 
+
+
+Set
+  HashSet
+  LinkedHashSet
+
+
+Set :
+
+  to group all the objects as a single entity 
+  it allows both homogenious and heterogenious objects 
+  insertion order is not preserved.
+  duplicates are not allowed 
+  null insertion is possible but only for one time. 
+  
+     HashSet
+	 LinkedHashSet 
+  
+
+class HashSet implements Set extends Collection extends Iterable
+{
+}
+
+example:
+`````````
+package com.oracle.cfw;
+
+import java.util.HashSet;
+
+public class Test3 {
+	
+	public static void main(String[] args) {
+		
+		//create the object of HashSet
+		
+		HashSet hs = new HashSet();
+		
+		hs.add(98);
+		hs.add(98);
+		hs.add(null);
+		hs.add(true);
+		hs.add("rk");
+		hs.add(null);
+		
+		
+		System.out.println(hs);
+	}
+
+}
+
+Test3.java:
+```````````
+package com.oracle.cfw;
+
+import java.util.HashSet;
+
+public class Test3 {
+	
+	public static void main(String[] args) {
+		
+		//create the object of HashSet
+		
+		HashSet<Employee> hs = new HashSet<>();
+		
+		hs.add(new Employee(10,"rama"));
+		hs.add(new Employee(23,"vedanth"));
+		hs.add(new Employee(87,"riya"));
+		hs.add(new Employee(10,"rama"));
+		
+		System.out.println(hs);
+	}
+
+}
+
+Employee.java:
+```````````````
+package com.oracle.cfw;
+
+public class Employee {
+
+	
+	private Integer empid;
+	private String empname;
+	public Integer getEmpid() {
+		return empid;
+	}
+	public void setEmpid(Integer empid) {
+		this.empid = empid;
+	}
+	public String getEmpname() {
+		return empname;
+	}
+	public void setEmpname(String empname) {
+		this.empname = empname;
+	}
+	public Employee(Integer empid, String empname) {
+		super();
+		this.empid = empid;
+		this.empname = empname;
+	}
+	@Override
+	public String toString() {
+		return empid + " " + empname;
+	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((empid == null) ? 0 : empid.hashCode());
+		result = prime * result + ((empname == null) ? 0 : empname.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Employee other = (Employee) obj;
+		if (empid == null) {
+			if (other.empid != null)
+				return false;
+		} else if (!empid.equals(other.empid))
+			return false;
+		if (empname == null) {
+			if (other.empname != null)
+				return false;
+		} else if (!empname.equals(other.empname))
+			return false;
+		return true;
+	}
+	
+	
+}
+
+
+HashSet vs LinkedHashSet:
+
+except insertion order.
+
+in case of LinkedHashSet , insertion order is preserved 
+
+
+
+SorteSet:
+``````````
+SortedSet is an interface
+
+   ->TreeSet
+   
+ 1.it allows only homogenious objects not heterogenious objects
+ 
+   
+class TreeSet implements SortedSet extends Set extends Collection extends 
+ Iterable
+ {
+ 
+ }
+
+example:
+``````````
+package com.oracle.cfw;
+
+import java.util.TreeSet;
+
+public class Test4 {
+	
+	public static void main(String[] args) {
+		
+		//create the object for TreeSet
+		
+		TreeSet<Integer> ts = new TreeSet<>();
+		
+		ts.add(12);
+		ts.add(98);
+		ts.add(7);
+		ts.add(890);
+		ts.add(6);
+		
+		
+		System.out.println(ts);
+	}
+
+}
+
+
+Employee.java:
+```````````````
+package com.oracle.cfw;
+
+public class Employee implements Comparable<Employee>{
+
+	
+	private Integer empid;
+	private String empname;
+	public Integer getEmpid() {
+		return empid;
+	}
+	public void setEmpid(Integer empid) {
+		this.empid = empid;
+	}
+	public String getEmpname() {
+		return empname;
+	}
+	public void setEmpname(String empname) {
+		this.empname = empname;
+	}
+	public Employee(Integer empid, String empname) {
+		super();
+		this.empid = empid;
+		this.empname = empname;
+	}
+	@Override
+	public String toString() {
+		return empid + " " + empname;
+	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((empid == null) ? 0 : empid.hashCode());
+		result = prime * result + ((empname == null) ? 0 : empname.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Employee other = (Employee) obj;
+		if (empid == null) {
+			if (other.empid != null)
+				return false;
+		} else if (!empid.equals(other.empid))
+			return false;
+		if (empname == null) {
+			if (other.empname != null)
+				return false;
+		} else if (!empname.equals(other.empname))
+			return false;
+		return true;
+	}
+	@Override
+	public int compareTo(Employee o) {
+			
+		//return (this.getEmpid()>o.getEmpid())?1:(this.getEmpid()<o.getEmpid())?-1:0;
+			
+	  // return -this.getEmpid().compareTo(o.getEmpid());
+	
+		return o.getEmpname().compareTo(this.getEmpname());
+	}
+	
+	
+}
+
+Test4.java:
+``````````````
+package com.oracle.cfw;
+
+import java.util.TreeSet;
+
+public class Test4 {
+	
+	public static void main(String[] args) {
+		
+		//create the object for TreeSet
+		
+		TreeSet<Employee> ts = new TreeSet<>();
+		
+		ts.add(new Employee(100,"rama"));
+		ts.add(new Employee(45,"sreeyansh"));
+		ts.add(new Employee(78,"riya"));
+		ts.add(new Employee(6,"amulya"));
+		
+		System.out.println(ts);
+	}
+
+}
+
+
+TreeSet implements SortedSet extends Set extends Collection 
+{
+}
+
+package com.oracle.cfw;
+
+import java.util.TreeSet;
+
+public class Test5 {
+
+	
+	public static void main(String[] args) {
+		
+		TreeSet<Integer> ts = new TreeSet<>();
+		
+		ts.add(12);
+		ts.add(7);
+		ts.add(18);
+		ts.add(13);
+		ts.add(23);
+		
+		ts.add(9);
+		ts.add(8);
+		
+		System.out.println(ts.first());
+		System.out.println(ts.last());
+		System.out.println(ts.headSet(13));
+		System.out.println(ts.tailSet(13));
+		System.out.println(ts.subSet(9, 18));
+				
+	}
+}
+
+
+
+Test6.java:
+````````````
+package com.oracle.cfw;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Test6 {
+
+	
+	public static void main(String[] args) {
+		
+		ArrayList al = new ArrayList();
+		
+		al.add(78);
+		al.add(8);
+		al.add(67);
+		al.add(12);
+		al.add(18);
+		al.add(7);
+		
+		
+		
+		//System.out.println(al);
+		
+		 // Collections.sort(al);
+		
+		//System.out.println(al);
+		
+		Collections.sort(al, new MyComparator());
+		System.out.println(al);
+	}
+}
+
+MyComparator.java:
+``````````````````
+package com.oracle.cfw;
+
+import java.util.Comparator;
+
+public class MyComparator implements Comparator<Integer> {
+
+	@Override
+	public int compare(Integer o1, Integer o2) {
+		
+		return o2.compareTo(o1);
+	}
+
+}
+
+
+Test6.java:
+````````````
+package com.oracle.cfw;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Test6 {
+
+	
+	public static void main(String[] args) {
+		
+		ArrayList<Employee> al = new ArrayList<>();
+		
+		al.add(new Employee(10,"sreeyansh"));
+		al.add(new Employee(8,"amulya"));
+		al.add(new Employee(67,"rk"));
+		al.add(new Employee(18,"leshviha"));
+		
+		
+		Collections.sort(al, new MyComparator());
+	    System.out.println(al);
+	}
+}
+
+MyComparator.java:
+```````````````````
+package com.oracle.cfw;
+
+import java.util.Comparator;
+
+public class MyComparator implements Comparator<Employee> {
+
+	@Override
+	public int compare(Employee o1, Employee o2) {
+		
+		//return o2.getEmpid().compareTo(o1.getEmpid());
+	
+	    return o2.getEmpname().compareTo(o1.getEmpname());
+	}
+
+}
+
+Employee.java:
+`````````````````
+package com.oracle.cfw;
+
+public class Employee{
+
+	
+	private Integer empid;
+	private String empname;
+	
+	
+	public Integer getEmpid() {
+		return empid;
+	}
+	public void setEmpid(Integer empid) {
+		this.empid = empid;
+	}
+	public String getEmpname() {
+		return empname;
+	}
+	public void setEmpname(String empname) {
+		this.empname = empname;
+	}
+	public Employee(Integer empid, String empname) {
+		super();
+		this.empid = empid;
+		this.empname = empname;
+	}
+	@Override
+	public String toString() {
+		return empid + " " + empname;
+	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((empid == null) ? 0 : empid.hashCode());
+		result = prime * result + ((empname == null) ? 0 : empname.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Employee other = (Employee) obj;
+		if (empid == null) {
+			if (other.empid != null)
+				return false;
+		} else if (!empid.equals(other.empid))
+			return false;
+		if (empname == null) {
+			if (other.empname != null)
+				return false;
+		} else if (!empname.equals(other.empname))
+			return false;
+		return true;
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
