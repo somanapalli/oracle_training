@@ -3462,4 +3462,94 @@ public class Test4 {
 	}
 }
 
+Function functional interface:
+````````````````````````````````
+package com.oracle.java8;
+
+import java.util.function.Function;
+//R	apply(T t)
+public class Test6 {
+	
+	public static void main(String[] args) {
+		
+		Function<String, Integer> f = s->s.length();
+	
+	   System.out.println(f.apply("rk"));
+	   System.out.println(f.apply("oracle"));
+	}
+
+}
+
+Function example on user defined object:
+``````````````````````````````````````
+package com.oracle.java8;
+
+import java.util.ArrayList;
+import java.util.function.Function;
+//R	apply(T t)
+public class Test6 {
+	
+	public static void main(String[] args) {
+		
+		//Function<String, Integer> f = s->s.length();
+	
+	  // System.out.println(f.apply("rk"));
+	  // System.out.println(f.apply("oracle"));
+		
+		ArrayList<Student> l = new ArrayList<>();
+		l.add(new Student("sunny",100));
+		l.add(new Student("bunny",65));
+		l.add(new Student("Chinny",55));
+		l.add(new Student("Vinny",45));
+		l.add(new Student("Pinny",25));
+		
+		
+		Function<Student, String> f = s -> {
+			
+			int marks = s.marks;
+			if(marks>=80) {
+				return "A[Dictinction]";
+			}
+			else if(marks>=60) {
+				return "B[First Class]";
+			}
+			else if(marks>=50) {
+				return "C[Second Class]";
+			}
+			else if(marks>=35) {
+				return "D[Third Class]";
+			}
+			else
+			{
+				return "E[Failed]";
+			}
+			
+		
+		};
+		
+		for(Student s: l)
+		{
+			System.out.println("student name: " + s.name);
+			System.out.println("student marks: " + s.marks);
+			System.out.println("student Grade: " + f.apply(s));
+		}
+		
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
