@@ -3088,13 +3088,378 @@ public class Test1 {
 }
 
 
+lambda expression:
+````````````````````
+
+it is an anonymous function
+
+to write the concise code. 
+
+
+to enable functional programming in java.
+
+doesn't have any name , 
+doesn't have any returntype
+no need to specify parameter type also, based on the context compiler can decide the parameter
+type(s).
+doesn't have any access modifier.
+
+
+
+public void m1()
+{
+System.out.println("welcome to lambda expressions");
+}
+
+() ->  System.out.println("welcome to lambda expressions"); 
+
+
+public String getFullName(String fname, String lname)
+{
+return fname+lname;
+}
+
+(String fname,String lname)-> { return fname+lname }
+
+(fname,lname)-> fname+lname;
+
+
+public int getSquare(int x)
+{
+return x*x;
+}
+
+x->x*x;
+
+
+interface i1
 
 
 
 
+we can replace with lambda expression when my interface is functional 
+interface.
+
+functional interface:
+``````````````````````
+it is also an interface, but which contains only single abstract method 
+we can maintain some otehr default or static methods .
+
+
+i1.java:
+`````````
+package com.oracle.java8;
+
+@FunctionalInterface
+public interface i1 {
+
+	 //void sum(int x, int y);
+	 
+	 //String getFullName(String fname,String lname);
+	
+	   int square(int x);
+	   
+	   
+	 
+}
+
+Test2.java:
+````````````````
+package com.oracle.java8;
+
+public class Test2 {
+	// void sum(int x, int y);
+	//String getFullName(String fname,String lname);
+	public static void main(String[] args) {
+		//runtime polymorphism
+		//i1 obj = (x,y)->System.out.println("sum is: " +(x+y));
+		
+		//obj.sum(3, 4);
+		
+		//i1 obj = (fname,lname)->fname+lname;
+		
+		//String fullName=obj.getFullName("Rama","oracle");
+		
+		//System.out.println("fullname is  " + fullName);
+		
+		//i1 obj = x->x*x;
+		//int squareResult = obj.square(2);
+		//System.out.println("square of the given number is: " + squareResult);
+	}
+
+}
+
+pre-defined functional interfaces:
+`````````````````````````````````
+
+Comparator
+Runnable 
+Callable
+... 
+Predicate
+Function 
+Consumer
+Supplier 
+etc.. 
 
 
 
+example with lambda expression:
+`````````````````````````````````
+package com.oracle.java8;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Test3 {
+	
+	//public int compare(Integer o1, Integer o2)
+	public static void main(String[] args) {
+		
+		ArrayList<Integer> al = new ArrayList<Integer>();
+		
+		for(int i=1;i<=10;i++) {
+			al.add(i);
+		}
+		al.add(0);
+		
+		Collections.sort(al,(o1,o2)->o2.compareTo(o1));
+		
+		System.out.println(al);
+	
+	}
+
+}
+
+with lambda expression alogn with userdefined object(s):
+```````````````````````````````````````````````````````
+package com.oracle.java8;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Test3 {
+	
+	//public int compare(Integer o1, Integer o2)
+	public static void main(String[] args) {
+		
+		ArrayList<Employee> al = new ArrayList<Employee>();
+		
+		al.add(new Employee(100, "rk"));
+		al.add(new Employee(7,"sriyansh"));
+		al.add(new Employee(45,"anusha"));
+		
+	//	Collections.sort(al,(e1,e2)->e1.getEmpid().compareTo(e2.getEmpid()));
+		
+		Collections.sort(al,(e1,e2)->e2.getEmpname().compareTo(e1.getEmpname()));
+		System.out.println(al);
+		
+		
+	
+	}
+
+}
+
+Employee.java:
+``````````````````
+package com.oracle.java8;
+
+public class Employee {
+	
+	private Integer empid;
+	private String empname;
+	public Integer getEmpid() {
+		return empid;
+	}
+	public void setEmpid(Integer empid) {
+		this.empid = empid;
+	}
+	public String getEmpname() {
+		return empname;
+	}
+	public void setEmpname(String empname) {
+		this.empname = empname;
+	}
+	public Employee(Integer empid, String empname) {
+		super();
+		this.empid = empid;
+		this.empname = empname;
+	}
+	@Override
+	public String toString() {
+		return empid + " " + empname;
+	}
+	
+	
+
+}
+
+Predicate
+Function 
+Supplier 
+Consumer . 
+
+boolean	test(T t)
+
+Evaluates this predicate on the given argument.
+
+
+write a predicate to check whether given number is even or not?
+
+Predicate p = x->x%2==0;
+
+p.test(78);//true
+p.test(89);//false
+
+
+Employee.java:
+````````````````
+package com.oracle.java8;
+
+public class Employee {
+	
+	String name;
+	String designation ;
+	double salary;
+	String city;
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getDesignation() {
+		return designation;
+	}
+	public void setDesignation(String designation) {
+		this.designation = designation;
+	}
+	public double getSalary() {
+		return salary;
+	}
+	public void setSalary(double salary) {
+		this.salary = salary;
+	}
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((city == null) ? 0 : city.hashCode());
+		result = prime * result + ((designation == null) ? 0 : designation.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(salary);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Employee other = (Employee) obj;
+		if (city == null) {
+			if (other.city != null)
+				return false;
+		} else if (!city.equals(other.city))
+			return false;
+		if (designation == null) {
+			if (other.designation != null)
+				return false;
+		} else if (!designation.equals(other.designation))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (Double.doubleToLongBits(salary) != Double.doubleToLongBits(other.salary))
+			return false;
+		return true;
+	}
+	public Employee(String name, String designation, double salary, String city) {
+		super();
+		this.name = name;
+		this.designation = designation;
+		this.salary = salary;
+		this.city = city;
+	}
+	@Override
+	public String toString() {
+		return "Employee [name=" + name + ", designation=" + designation + ", salary=" + salary + ", city=" + city
+				+ "]";
+	}
+	
+	
+	
+
+}
+
+Test4.java:
+````````````
+package com.oracle.java8;
+
+import java.util.ArrayList;
+import java.util.function.Predicate;
+
+public class Test4 {
+
+	
+	public static void main(String[] args) {
+		ArrayList<Employee> list = new ArrayList<Employee>();
+		populate(list);
+		
+	Predicate<Employee> p1 = emp->emp.getDesignation().equals("Manager");
+	System.out.println("Manager's information");
+	display(p1,list);
+	
+	
+	Predicate<Employee> p2 = emp->emp.getCity().equals("Bangalore");
+	System.out.println("Bangalore Employees information ");
+	display(p2,list);
+	
+	System.out.println("All Managers from Bangalore");
+	
+	display(p1.and(p2),list);
+	
+	
+	}
+	
+	
+	public static void populate(ArrayList<Employee> list)
+	{
+		list.add(new Employee("rk", "CEO", 30000,"Hyderabad"));
+		list.add(new Employee("sriyansh", "Manager", 20000,"Hyderabad"));
+		list.add(new Employee("amulya", "Manager", 20000,"Bangalore"));
+		list.add(new Employee("Pratik", "Lead", 15000,"Hyderabad"));
+		list.add(new Employee("Anusha", "Lead", 15000,"Bangalore"));
+		list.add(new Employee("Riya", "Developer", 10000,"Hyderabad"));
+		list.add(new Employee("Vedanth", "Developer", 10000,"Hyderabad"));
+		list.add(new Employee("Charviha", "Developer", 10000,"Bangalore"));
+		
+	}
+	
+	
+	public static void display(Predicate<Employee> p,ArrayList<Employee> list) {
+		
+		for(Employee e: list)
+		{
+			if(p.test(e))
+			{
+				System.out.println(e);
+			}
+		}
+		System.out.println("*****************************");
+	}
+}
 
 
