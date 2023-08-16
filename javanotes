@@ -2743,6 +2743,354 @@ public class Test8 {
 
 }
 
+jdbc:
+``````
+jdbc stands for java database connectivity.
+
+in gneral, if we would like to store the data, we will use db right now 
+in the market.
+
+how the data gets stored in the db?
+ 
+    in the form of db objects
+	
+	tables,view,sequences,indexes, .. 
+	
+ddl commands,dml commands, dcl,tcl,drl..
+
+create 
+insert 
+update
+
+delete
+select 
+
+ oracle  db
+
+first we need connection from the db, by providing valid credentials.
+
+
+
+jdbc -java database connectivity
+
+jdbc is a technology or specification given by sunmicrosystem
+
+and implementations are provided by differnt database vendors
+
+Jdbc interface 
+
+  Oracle,MySql,Ingress,Sybase,postgresql, etc.. 
+  
+  in the form of jar files. 
+  
+
+these jar file names are different from one db to another db.
+
+
+steps to follow to write the jdbc program:
+``````````````````````````````````````````
+oracle db
+
+to form the bridge in between java to db, we need one software or one class
+i.e driver 
+
+
+  for every db, they provide 4 types of drivers 
+  
+  type4 driver -> java , platform indpendent driver
+  
+  oracle 
+  derby 
+     type1,type2,type3 & type 4 
+
+
+1.load the driver class 
+
+       oracle.jdbc.driver.OracleDriver
+	   
+2.obtain the connection 
+	   
+
+jdbc:oracle:thin:@localhost:1521:xe
+
+
+3.Create the object for Statement  to send the queries
+
+4.process the queries
+
+5.close the connection 
+
+
+ 
+  
+package com.oracle.jdbc;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+
+public class Test1 {
+	
+	public static void main(String[] args) {
+		
+		try {
+		//load the driver class 
+		
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		System.out.println("driver class loaded");
+		
+		Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "system", "system");
+		
+		System.out.println("got the connection ");
+		
+		//to send the sql queries from java env to db env
+		Statement st = con.createStatement();
+		
+		String query = "insert into student values(103,'sriyansh')";
+		
+		//process this query
+		
+		int x = st.executeUpdate(query);
+		
+		System.out.println(x + "row(s) inserted");
+		
+		//close the connetion 
+		con.close();
+		
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+		}
+		
+	}
+
+}
+
+
+example on PreparedStatement:
+`````````````````````````````
+package com.oracle.jdbc;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.util.Scanner;
+
+public class Test1 {
+	
+	public static void main(String[] args) {
+		
+		try {
+		//load the driver class 
+		
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		System.out.println("driver class loaded");
+		
+		Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "system", "system");
+		
+		System.out.println("got the connection ");
+		
+		//to send the sql queries from java env to db env
+		PreparedStatement ps = con.prepareStatement("insert into student values(?,?)");
+		
+		Scanner s = new Scanner(System.in);
+		
+		System.out.println("enter student id");
+		
+		int stid = s.nextInt();
+		
+		ps.setInt(1, stid);
+		
+		System.out.println("enter student name");
+		
+		String stname = s.next();
+		
+		ps.setString(2, stname);
+		//process this query
+		
+		int x = ps.executeUpdate();
+		
+		System.out.println(x + "row(s) inserted");
+		
+		//close the connetion 
+		con.close();
+		
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+		}
+		
+	}
+
+}
+
+Statement: it is for processing static queries.
+PreparedStatement: it is for processing dynamic queries. 
+
+
+select * from student;
+
+how to process select queries :
+``````````````````````````````````
+package com.oracle.jdbc;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+public class Test1 {
+	
+	public static void main(String[] args) {
+		
+		try {
+		//load the driver class 
+		
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		System.out.println("driver class loaded");
+		
+		Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "system", "system");
+		
+		System.out.println("got the connection ");
+		
+		
+		
+		Statement st = con.createStatement();
+		
+		
+		ResultSet rs = st.executeQuery("select * From student");
+		
+		while(rs.next())
+		{
+		System.out.println(rs.getInt(1) + " " + rs.getString(2));
+		}
+		
+		//close the connetion 
+		con.close();
+		
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+		}
+		
+	}
+
+}
+
+
+
+how to process meta information:
+`````````````````````````````````
+package com.oracle.jdbc;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.Statement;
+
+public class Test1 {
+	
+	public static void main(String[] args) {
+		
+		try {
+		//load the driver class 
+		
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		System.out.println("driver class loaded");
+		
+		Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "system", "system");
+		
+		System.out.println("got the connection ");
+		
+		
+		
+		Statement st = con.createStatement();
+		
+		
+		ResultSet rs = st.executeQuery("select * From student");
+		
+		
+		ResultSetMetaData rsmd = rs.getMetaData();
+		
+		System.out.println("the no.of columns: " + rsmd.getColumnCount());
+		
+		
+		for(int i=1;i<=rsmd.getColumnCount();i++)
+		{
+			System.out.println(rsmd.getColumnName(i) + " " + rsmd.getColumnTypeName(i) + "(" +rsmd.getPrecision(i) + ")");
+		}
+		
+		//close the connetion 
+		con.close();
+		
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+		}
+		
+	}
+
+}
+
+batch processing:
+```````````````````
+package com.oracle.jdbc;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.Statement;
+
+public class Test1 {
+	
+	public static void main(String[] args) {
+		
+		try {
+		//load the driver class 
+		
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		System.out.println("driver class loaded");
+		
+		Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "system", "system");
+		
+		System.out.println("got the connection ");
+		
+		
+		Statement st = con.createStatement();
+		
+		st.addBatch("insert into student values(105,'pratik')");
+		
+		st.addBatch("update student set stname='krishna' where stid=100");
+		
+		
+		int x[] = st.executeBatch();
+		
+		System.out.println(x[0] + " row(s) inserted");
+		System.out.println(x[1] + " row(s) updated");
+		
+		//close the connetion 
+		con.close();
+		
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+		}
+		
+	}
+
+}
+
+
+
+
+
 
 
 
