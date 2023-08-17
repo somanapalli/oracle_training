@@ -3912,4 +3912,189 @@ public class Test7 {
 }
 
 
+default methods and static methods inside an interface:
+````````````````````````````````````````````````````````
+java 1.8 v they introducted default methods & static methods also inside 
+an interface 
+
+   defender methods
+   
+   interface i1{
+	   default void m1(){
+	   sysout("default method");
+	   }
+   }
+
+class Test impelements i1{
+  main(){
+    Test obj = new Test();
+	obj.m1();
+  }
+}
+
+interface Left
+{
+   default void m1(){
+     sysout("left default method");
+   }
+}
+
+interface Right
+{
+   default void m1()
+   {
+   
+     Sysout("Right Default method");
+   }
+
+}
+
+class Test implements Left,Right{
+  public void m1()
+   {
+   
+     Left.super.m1();
+   }
+   
+   main(){
+   
+    Test t = new Test();
+	t.m1();
+	
+   }
+
+}
+
+
+
+
+
+Method Reference:
+```````````````````
+
+::
+
+Functional interface method can be mapped to our specified method by using 
+:: operator. 
+this is called method reference.
+
+our own method can be either static or instance method. 
+
+functional interface method and our specific method should have same argument
+types except this , the remaining things like returntype, method name, modifiers etc are not 
+required to match.
+
+syntax:
+
+  classname::methodname-if the method is static method 
+  
+  objref::methodname - if the method is instance method.
+  
+  Functional interface can refer lambda expression 
+  and Functional interface can also refer method reference. 
+  Hence lambda expression can be replaced with method refence. 
+  
+  
+ With lambda expression example:
+``````````````````````````````````
+package com.oracle.java8;
+
+public class Test10 {
+	
+	public static void main(String[] args) {
+		
+		Runnable r = ()->{
+			
+			for(int i=0;i<=10;i++)
+			{
+				System.out.println("CHILD THREAD");
+			}
+		};
+		
+		
+		Thread t = new Thread(r);
+		t.start();
+		
+		for(int i=0;i<=10;i++) {
+			
+			System.out.println("MAIN THREAD");
+		}
+	}
+
+}
+
+ 
+example:
+`````````
+package com.oracle.java8;
+
+public class Test10 {
+	
+	
+	public  void m1()
+	{
+		for(int i=0;i<=10;i++)
+		{
+			System.out.println("CHILD THREAD");
+		}
+	}
+	
+	public static void main(String[] args) {
+		
+		//Runnable r = Test10::m1;
+		
+		Test10 obj = new Test10();
+		Runnable r = obj::m1;
+		
+		Thread t = new Thread(r);
+		t.start();
+		
+		for(int i=0;i<=10;i++) {
+			
+			System.out.println("MAIN THREAD");
+		}
+	}
+
+}
+
+
+example:
+`````````
+package com.oracle.java8;
+
+interface i12 {
+	   void m1(int i);
+}
+public class Test11 {
+
+	public void m2(int i) {
+		System.out.println("from method refeence: " +i);
+	}
+	
+	public static void main(String[] args) {
+		i12 obj = i->System.out.println("from lambda expression " + i);
+		obj.m1(34);
+		Test11 obj1 = new Test11();
+		
+		i12 obj2 = obj1::m2;
+		obj2.m1(45);
+		
+	}
+}
+
+constructor reference:
+`````````````````````````
+  classname::new
+  
+
+
+stream api 
+parallel stream 
+modular programming 
+
+
+
+
+
+
 
