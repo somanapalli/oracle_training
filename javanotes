@@ -4087,10 +4087,99 @@ constructor reference:
   classname::new
   
 
+streams:
+`````````
+java.util.stream and java.io.stream 
 
-stream api 
-parallel stream 
-modular programming 
+java.util.stream -> is meant for processing objects from the collection.
+
+collection and stream :
+
+stream()
+
+stream() is available as a default method to every collection 
+from 1.8 v onwards.
+
+Stream s = c.stream();
+where c is any collection 
+
+Stream is an interface -java.util.stream package
+
+
+1.configuration -filter mechanism or map mechanism
+2.processing-collect(),count(),sorted(),min(),max(),forEach(),toArray(),Stream.of()
+
+
+Stream s = c.stream();
+Stream s1 = s.filter(i->i%2==0);
+
+mapping:
+````````
+if we want to create a separte new object for every object present in the 
+collection based on our requirement we should go for map().
+
+public Stream map(Function f)
+
+
+Stream s = c.stream();
+Stream s1 = c.map(i->i+10);
+
+without streams:
+```````````````````
+package com.oracle.java8;
+
+import java.util.ArrayList;
+
+public class Test12 {
+
+	public static void main(String[] args) {
+		
+		ArrayList<Integer> al = new ArrayList<Integer>();
+		
+		for(int i=1;i<=10;i++) {
+			al.add(i);
+		}
+		
+		System.out.println(al);
+		ArrayList<Integer> al1 = new ArrayList<Integer>();
+		
+		for(Integer i:al) {		
+			if(i%2==0) {
+				al1.add(i);
+			}
+		}
+		System.out.println(al1);
+	}
+}
+
+with stream api:
+``````````````````
+package com.oracle.java8;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Test13 {
+	public static void main(String[] args) {
+		
+		ArrayList<Integer> al = new ArrayList<Integer>();
+		
+		for(int i=1;i<=10;i++) {
+			al.add(i);
+		}
+		
+		List<Integer> l1 = al.stream()
+		.filter(i->i%2==0)
+		.collect(Collectors.toList());
+		
+		
+	    System.out.println(l1);
+	}
+
+	}
+	
+	
 
 
 
