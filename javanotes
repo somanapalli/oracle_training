@@ -4439,3 +4439,66 @@ by importing sub package, only sub package information we can access
 by importing sub package, don't expect main package information .
 
 
+
+xml:
+```
+xml -extensible mark up language
+
+  pre-defined tags
+  user-defined tags
+ 
+ 
+html -> hyper text markup language 
+
+ it contains all are predefined 
+ w3c 
+ if our requirement is to present the data -> html 
+ if our requirement is to describe the data -> xml 
+ 
+w3c rules 
+
+<root attribute="">
+  <child></child>
+
+</root>
+
+
+<Person>
+   <name>rk
+   hyd</address>
+   <company</company>
+<Person>
+
+
+where we are using xml:
+
+data transformation 
+configuration files
+  web.xml,pom.xml , ....
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<DriverLicense status="suspended">
+  <Number>123</Number>
+  <FirstName>Rama</FirstName>
+  <LastName>Krishna</LastName>
+  <DateOfBirth>12/Nov/1988</DateOfBirth>
+  <VehicleType>Car</VehicleType>
+  <DateOfIssue>11/June/2023</DateOfIssue>
+  <ExpiryDate>11/June/2028</ExpiryDate>
+  <Photo location ="servername/filename"/>
+  <Address>
+     <street>stevens dr</street>
+     <city>king of prussia</city>
+     <state>PA</state>
+     <country>USA</country>
+     <zipcode>19406</zipcode>
+  
+  </Address>
+
+</DriverLicense>
+
+
+
+
