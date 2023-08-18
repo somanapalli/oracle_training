@@ -4592,4 +4592,236 @@ patient.xsd:
 </schema>
 
 
+DOMParserDemo.java:
+````````````````````
+package com.oracle.xmlparsers.dom;
+
+import java.io.IOException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+import com.oracle.xmlparsers.dto.Address;
+import com.oracle.xmlparsers.dto.DriversLicense;
+
+public class DOMParserDemo {
+
+	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {
+
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder documentBuilder = factory.newDocumentBuilder();
+		Document document = documentBuilder.parse(ClassLoader.getSystemResourceAsStream("xml/DriversLicense.xml"));
+		
+		
+		DriversLicense license = new DriversLicense();
+
+		NodeList numberList = document.getElementsByTagName("Number");
+		Node numberItem = numberList.item(0);
+		license.setNumber(Long.parseLong(numberItem.getTextContent()));
+
+		NodeList firstNameList = document.getElementsByTagName("FirstName");
+		Node firstNameItem = firstNameList.item(0);
+		license.setFirstName(firstNameItem.getTextContent());
+
+		NodeList lastNameList = document.getElementsByTagName("LastName");
+		Node lastNameItem = lastNameList.item(0);
+		license.setLastName(lastNameItem.getTextContent());
+
+		Element documentElement = document.getDocumentElement();
+		license.setStatus(documentElement.getAttribute("status"));
+
+		NodeList addressList = document.getElementsByTagName("Address");
+		Node addressNode = addressList.item(0);
+		NodeList addressChildNodes = addressNode.getChildNodes();
+		Address address = new Address();
+
+		for (int i = 0; i < addressChildNodes.getLength(); i++) {
+			Node item = addressChildNodes.item(i);
+
+			if (item instanceof Element) {
+
+				switch (item.getNodeName()) {
+				case "street":
+					address.setStreet(item.getTextContent());
+					break;
+				case "city":
+					address.setCity(item.getTextContent());
+					break;
+				case "state":
+					address.setState(item.getTextContent());
+					break;
+				case "country":
+					address.setCountry(item.getTextContent());
+					break;
+				case "zipcode":
+					address.setZipcode(item.getTextContent());
+					break;
+
+				}
+			}
+
+		}
+
+		license.setAddress(address);
+
+		System.out.println(license.getNumber());
+		System.out.println(license.getFirstName());
+		System.out.println(license.getLastName());
+		System.out.println(license.getStatus());
+		System.out.println(license.getAddress().getCity());
+		System.out.println(license.getAddress().getCountry());
+
+	}
+
+}
+
+DriverLicense.java:
+`````````````````````
+package com.oracle.xmlparsers.dto;
+
+public class DriversLicense {
+
+	private String status;
+	private long number;
+	private String firstName;
+	private String lastName;
+	
+	
+	//association or has-a relation 
+	private Address address;
+	
+	
+	
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public long getNumber() {
+		return number;
+	}
+
+	public void setNumber(long number) {
+		this.number = number;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+}
+
+Address.java:
+`````````````
+package com.oracle.xmlparsers.dto;
+
+public class Address {
+	
+	private String street;
+	private String city;
+	private String state;
+	private String country;
+	private String zipcode;
+
+	public String getStreet() {
+		return street;
+	}
+
+	public void setStreet(String street) {
+		this.street = street;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getZipcode() {
+		return zipcode;
+	}
+
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
+	}
+
+}
+
+DriverLicense.xml:
+``````````````````
+<?xml version="1.0" encoding="UTF-16" standalone="no"?>
+
+<DriversLicense status="suspended">
+
+	<Number>12345</Number>
+	
+	<FirstName>Ram</FirstName>
+	<LastName>Oracle</LastName>
+	<DateOfBirth>18/may/1981</DateOfBirth>
+	<VehicleType>Car</VehicleType>
+	<DateOfIssue>11/june/2012</DateOfIssue>
+	<ExpirtyDate>11/june/2015</ExpirtyDate>
+	<Photo location="servername/filename" />
+	<Address>
+		<street>stevens dr</street>
+		<city>king of prussia</city>
+		<state>PA</state>
+		<country>USA</country>
+		<zipcode>19406</zipcode>
+
+	</Address>
+
+</DriversLicense>
+
+	
+	
 
