@@ -4476,7 +4476,8 @@ data transformation
 configuration files
   web.xml,pom.xml , ....
 
-
+DriverLicense.xml:
+`````````````````````
 <?xml version="1.0" encoding="UTF-8"?>
 
 <DriverLicense status="suspended">
@@ -4499,6 +4500,96 @@ configuration files
 
 </DriverLicense>
 
+patient.xml:
+``````````
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:Patient xmlns:tns="http://www.rk.org/Patient" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.rk.org/Patient Patient.xsd ">
+  <tns:name>Rama</tns:name>
+  <tns:age>22</tns:age>
+  <tns:email>rk@gmail.com</tns:email>
+  <tns:gender>M</tns:gender>
+  <tns:phone>12345</tns:phone>
+  <tns:paymentType>
+    <!-- <tns:cash>3450</tns:cash> -->
+    
+    <tns:insurance>
+    
+       <tns:provider>icicilombard</tns:provider>
+       <tns:limit>500000</tns:limit>
+    
+    </tns:insurance>
+  </tns:paymentType>
+</tns:Patient>
+
+patient.xsd:
+``````````````
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.rk.org/Patient"
+	xmlns:tns="http://www.rk.org/Patient" elementFormDefault="qualified">
+
+
+	<element name="Patient" type="tns:Patient"></element>
+
+	<complexType name="Patient">
+
+		<sequence>
+
+			<element name="name" type="tns:String15Chars" />
+			<element name="age" type="int" />
+			<element name="email" type="string" />
+			<element name="gender" type="tns:Gender" />
+			<element name="phone" type="string" />
+        	<element name="paymentType" type="tns:PaymentType" />
+
+		</sequence>
+
+
+	</complexType>
+
+	<complexType name="PaymentType">
+
+		<choice>
+
+
+			<element name="cash" type="decimal"></element>
+			<element name="insurance" type="tns:Insurance"></element>
+
+		</choice>
+
+	</complexType>
+
+
+	<complexType name="Insurance">
+
+		<all>
+
+			<element name="provider" type="string" />
+			<element name="limit" type="decimal" />
+
+		</all>
+
+
+	</complexType>
+
+	<simpleType name="String15Chars">
+		<restriction base="string">
+			<maxLength value="15"></maxLength>
+		</restriction>
+
+	</simpleType>
+
+	<simpleType name="Gender">
+
+		<restriction base="string">
+			<enumeration value="M" />
+			<enumeration value="F" />
+
+		</restriction>
+
+	</simpleType>
+
+</schema>
 
 
 
