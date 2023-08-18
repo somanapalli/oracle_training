@@ -4179,11 +4179,263 @@ public class Test13 {
 
 	}
 	
+	filter() along with collect()
+	
+	map() along with collect()
 	
 
+min() and max()
+
+forEach()
+
+example:
+`````````
+package com.oracle.java8;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class Test14 {
+	
+	public static void main(String[] args) {
+		
+		ArrayList<String> al = new ArrayList<String>();
+		al.add("rk");
+		al.add("amulya");
+		al.add("sriyansh");
+		al.add("prathik");
+		al.add("madhumitha");
+		al.add("oracle");
+		
+		System.out.println(al);
+		
+		ArrayList<Integer> al1 = new ArrayList<Integer>();
+		for(int i=1;i<=10;i++) {
+			al1.add(i);
+		}
+				
+		
+		//List<String> l2 = al.stream().map(f->f.toUpperCase()).collect(Collectors.toList());
+	    
+		//long count =al.stream().filter(s->s.length()==5).count();
+		//System.out.println("the number of 5 length strings are:" +count);
+	    //sorted()
+		
+		//List<String> l2 = al.stream().sorted().collect(Collectors.toList());
+	    //System.out.println("according to default natural sorting order: " + l2);
+		
+		List<String> l2 = al.stream().sorted((i1,i2)->i2.compareTo(i1)).collect(Collectors.toList());
+	
+		System.out.println("according to customized sorting order: " + l2);
+		
+		
+		Integer min = al1.stream().min((s1,s2)->s1.compareTo(s2)).get();
+		System.out.println("Minimum value is  : " + min);
+		
+		Integer max = al1.stream().max((s1,s2)->s1.compareTo(s2)).get();
+		System.out.println("Maximum value is  : " + max);
+	
+		
+		al.stream().forEach(s->System.out.println(s));
+		
+		System.out.println("=========================");
+		al.stream().forEach(System.out::println);
+	
+	    Stream s = Stream.of(99,88,77,96,55,34);
+	    s.forEach(System.out::println);
+	}
+
+}
+
+filter()
+map(),
+count(),
+forEach(),
+min(),
+max(),
+sorted(),
+sorted(Comparator)
+collect()
+of()
+
+
+
+jpms:
+`````
+  java platform module system.
+  
+  modularity concept introduced in java9 as the part of jigsaw
+  project.
+  2005
+  jep
+  java 7 (2011)
+  java 8(2014)
+  
+  jar file is nothing but group of packaages and 
+  each pacakage contains several .class files.
+  
+  module.
+  
+  by using module concept.
+  module is a group of packages similar to jar file.
+  module can contain configuration information also.
+  
+  
+  module-info.java
+  
+  3 module
+  each and every module should contain module-info.java
+  
+ in java9, jdk itself modularized.
+
+  all classes of java 9 are grouped into multiple modules(around 98)
+like 
+    java.base
+    java.logging
+    java.sql
+....
+System.out.println(String.class.getModule());//module java.base
+
+
+what is the need of jpms:
+``````````````````````````
+problem 1:
+````````````
+unexpected NoClassDefFoundError in middle of program execution 
 
 
 
 
+
+
+
+problem 2:
+````````````
+version conflicts or shadowing problems.
+
+classpath = jar1;jar2;jar3;jar4;
+
+
+if jar4 requires Test.class file of jar3.
+
+jar1 - Test.class 
+jar2 - Test.class
+jar3 - Test.class
+
+
+problem3:
+security problem.
+
+
+public is too much public in jar files.
+public is not really that much public in java9 module system.
+
+we can export particular package of module.
+
+module can offer strong encapuslation than jar file.
+
+
+problem4:
+```````````
+jdk/jre having monolithic arechitecture and very large size.
+
+jdk 1.0 -> 250+ classes
+jdk 1.1   500+ classes
+jdk 1.8 v - > 4000 + classes
+
+60mb
+
+module-info.java:
+``````````````````
+module moduleName{
+
+1.what other modules required by this module
+2.what packages exported by this module for other modules.
+}
+
+module moduleA
+{
+   
+}
+
+
+	
+  javac --module-source-path src -d out -m moduleA
+  
+  java --module-path out -m moduleA/pack1.Test1
+  
+  
+  
+  inter module dependencies :
+  
+  
+  within the application we can create any number of modules 
+  and one module can use other modules.
+  
+  
+	 we can define module dependencies inside module-info.java
+	 
+	 
+	 module moduleName{
+	 
+	   //what other modules reequired by this current module
+	   //what packages exported by this module for other modules
+	 }
+
+mainly we can use 2 types of directives
+
+  1.requires 
+  
+  2.exports 
+
+
+requires directive:
+ 
+   it can be used to specify the modules which are required 
+   by current module.
+   
+     module moduleA{
+	 
+	    requires moduleB;
+		requires moduleC;		
+	 }
+
+requires moduleA,moduleB -> invalid
+
+2.exports:
+```````````
+it can be used to specify what packages exported by current module to the 
+other modules.
+
+  module moduleA{
+  
+      exports pack1;
+	  exports pack2;
+  }
+
+exports pack1,pack2;-->invalid
+
+module modulename
+{
+   requires modulename;
+   exports packagename;
+}
+
+
+
+module A contains 3 packages 
+pack1,pack2 and pack3
+
+module moduleA{
+
+   exports pack1;
+   exports pack2;
+}
+
+by importing the main package, we can access all main package related classes
+by importing sub package, only sub package information we can access 
+by importing sub package, don't expect main package information .
 
 
